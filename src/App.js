@@ -1,13 +1,17 @@
-import React from 'react';
+import React, { Component } from 'react';
 import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
 import './App.css';
 import { ThemeProvider as MuiThemeProvider } from '@material-ui/core/styles';
 import createMuiTheme from '@material-ui/core/styles/createMuiTheme';
-import themeFile from './util/theme';
 import jwtDecode from 'jwt-decode';
+
+// redux
+import { Provider } from 'react-redux';
+import store from './redux/store';
 
 // components
 import Navbar from './components/Navbar';
+import themeObject from './util/theme';
 import AuthRoute from './util/AuthRoute';
 
 //pages
@@ -15,7 +19,7 @@ import home from './pages/home';
 import login from './pages/login';
 import signup from './pages/signup';
 
-const theme = createMuiTheme(themeFile);
+const theme = createMuiTheme(themeObject);
 
 let authenticated;
 const token = localStorage.FBIdToken;
@@ -29,23 +33,25 @@ if (token) {
   }
 }
 
-function App() {
-  return (
-    <MuiThemeProvider theme={theme}>
-      <div className="App">
-        <Router>
-          <Navbar/>
-            <div className="container">
-            <Switch>
-              <Route exact path = "/" component = {home} />
-              <AuthRoute exact path = "/login" component = {login} authenticated={authenticated}/>
-              <AuthRoute exact path = "/signup" component = {signup} authenticated={authenticated}/>
-            </Switch>
-            </div>
-        </Router>
-    </div>
-    </MuiThemeProvider>
-  );
-}
+class App extends Component {
+  render() {
+    return (
+      <MuiThemeProvider theme={theme}>
+        <Provider store={store}>
+          <Router>
+            <Navbar/>
+              <div className="container">
+              <Switch>
+                <Route exact path = "/" component = {home} />
+                <AuthRoute exact path = "/login" component = {login} authenticated={authenticated}/>
+                <AuthRoute exact path = "/signup" component = {signup} authenticated={authenticated}/>
+              </Switch>
+              </div>
+          </Router>
+        </Provider>
+      </MuiThemeProvider>
+    );
+  };
+};
 
 export default App;
