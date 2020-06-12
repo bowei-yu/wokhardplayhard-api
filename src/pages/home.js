@@ -10,7 +10,6 @@ class home extends Component {
     componentDidMount() {
         axios.get('/recipes')
         .then(res => {
-            console.log(res.data);
             this.setState({
                 recipes: res.data
             });
@@ -19,10 +18,10 @@ class home extends Component {
     }
     render() {
         let recentRecipesMarkup = this.state.recipes ? (
-            this.state.recipes.map(recipe => <Recipe recipe={recipe}/>)) 
+            this.state.recipes.map((recipe) => <Recipe key={recipe.recipeId} recipe={recipe}/>)) 
             : (<p> Loading... </p>);
         return (
-            <Grid container spacing={16}>
+            <Grid container spacing={10}>
                 <Grid item sm={8} xs ={12}>
                     {recentRecipesMarkup}
                 </Grid>
