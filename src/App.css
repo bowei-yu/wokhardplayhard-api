@@ -12,6 +12,9 @@ body {
 .nav-container{
   margin: auto;
 }
-a{
+.nav-container svg {
+  color: #fff;
+}
+a {
   text-decoration: none;
 }
