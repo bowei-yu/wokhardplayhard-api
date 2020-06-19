@@ -1,4 +1,4 @@
-import { SET_USER, SET_AUTHENTICATED, SET_UNAUTHENTICATED, LOADING_USER } from '../types';
+import { SET_USER, SET_AUTHENTICATED, SET_UNAUTHENTICATED, LOADING_USER, LIKE_RECIPE, UNLIKE_RECIPE } from '../types';
 
 const initialState = {
     authenticated: false,
@@ -27,6 +27,24 @@ export default function(state = initialState, action) {
             return {
                 ...state,
                 loading: true
+            };
+        case LIKE_RECIPE:
+            return {
+                ...state,
+                likes: [
+                    ...state.likes,
+                    {
+                        userHandle: state.credentials.handle,
+                        recipeId: action.payload.recipeId
+                    }
+                ]
+            };
+        case UNLIKE_RECIPE:
+            return {
+                ...state,
+                likes: state.likes.filter(
+                    (like) => like.recipeId !== action.payload.recipeId
+                )
             };
         default: 
             return state;
