@@ -15,3 +15,4 @@ export const SET_RECIPES = 'SET_RECIPES';
 export const SET_RECIPE = 'SET_RECIPE';
 export const LIKE_RECIPE = 'LIKE_RECIPE';
 export const UNLIKE_RECIPE = 'UNLIKE_RECIPE';
+export const DELETE_RECIPE = 'DELETE_RECIPE';

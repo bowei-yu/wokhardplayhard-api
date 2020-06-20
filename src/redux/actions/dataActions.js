@@ -1,4 +1,4 @@
-import { SET_RECIPES, LOADING_DATA, LIKE_RECIPE, UNLIKE_RECIPE } from '../types';
+import { SET_RECIPES, LOADING_DATA, LIKE_RECIPE, UNLIKE_RECIPE, DELETE_RECIPE } from '../types';
 import axios from 'axios';
 
 // get all recipes
@@ -39,6 +39,15 @@ export const unlikeRecipe = (recipeId) => dispatch => {
             type: UNLIKE_RECIPE,
             payload: res.data
         });
+    })
+    .catch(err => console.log(err));
+};
+
+// delete recipe
+export const deleteRecipe = (recipeId) => (dispatch) => {
+    axios.delete(`/recipe/${recipeId}`)
+    .then(() => {
+        dispatch({ type: DELETE_RECIPE, payload: recipeId})
     })
     .catch(err => console.log(err));
 };

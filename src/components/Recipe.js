@@ -5,6 +5,7 @@ import dayjs from 'dayjs';
 import relativeTime from 'dayjs/plugin/relativeTime';
 import PropTypes from 'prop-types';
 import MyButton from '../util/MyButton';
+import DeleteRecipe from './DeleteRecipe';
 
 // MUI Stuff
 import Card from '@material-ui/core/Card';
@@ -34,6 +35,7 @@ import { likeRecipe, unlikeRecipe } from '../redux/actions/dataActions';
 
 const styles = {
     card: {
+        position: 'relative',
         display: 'flex',
         marginBottom: 20,
     },
@@ -67,7 +69,7 @@ class Recipe extends Component {
         // same as const classes = this.props.classes
         const { classes, 
                 recipe: {body, createdAt, userImage, userHandle, recipeId, likeCount, commentCount}, 
-                user: { authenticated } 
+                user: { authenticated, credentials: { handle }} 
         } = this.props;
 
         const likeButton = !authenticated
@@ -88,11 +90,16 @@ class Recipe extends Component {
             )
         );
 
+        const deleteButton = authenticated && userHandle === handle ? (
+            <DeleteRecipe recipeId={recipeId}/>
+        ) : null;
+
         return (
             <Card className={classes.card}>
                 <CardMedia image={userImage} title="Profile image" className={classes.image}/>
                < CardContent className ={classes.content}>
                     <Typography variants="h5" component={Link} to={`/users/${userHandle}`} color="primary"> {userHandle} </Typography>
+                    {deleteButton}
                     <Typography variant="body2" color="textSecondary"> 
                     {dayjs(createdAt).fromNow()} </Typography>
                     <Typography variant="body1">{body} </Typography>
