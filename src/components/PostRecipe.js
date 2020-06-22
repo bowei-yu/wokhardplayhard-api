@@ -17,20 +17,22 @@ import CircularProgress from '@material-ui/core/CircularProgress';
 
 // redux stuff
 import { connect } from 'react-redux';
-import { postRecipe } from '../redux/actions/dataActions';
+import { postRecipe, clearErrors } from '../redux/actions/dataActions';
 
 const styles = theme => ({
     ...theme.spreadThis,
     submitButton: {
-        position: 'relative'
+        position: 'relative',
+        float: 'right',
+        marginTop: 10
     },
     progressSpinner: {
         position: 'absolute'
     },
     closeButton: {
         position: 'absolute',
-        left: '90%',
-        top: '5%'
+        left: '91%',
+        top: '6%'
     }
 });
 
@@ -50,8 +52,7 @@ class PostRecipe extends Component {
         };
 
         if (! nextProps.UI.errors && !nextProps.UI.loading) {
-            this.setState({ body: ''});
-            this.handleClose();
+            this.setState({ body: '', open: false, errors: {}});
         };
     };
 
@@ -60,6 +61,7 @@ class PostRecipe extends Component {
     };
 
     handleClose = () => {
+        this.props.clearErrors();
         this.setState({ open: false, errors: {}})
     };
 
@@ -115,6 +117,7 @@ class PostRecipe extends Component {
 
 PostRecipe.propTypes = {
     postRecipe: PropTypes.func.isRequired,
+    clearErrors: PropTypes.func.isRequired,
     UI: PropTypes.object.isRequired
 };
 
@@ -122,4 +125,4 @@ const mapStateToProps = (state) => ({
     UI: state.UI
 });
 
-export default connect(mapStateToProps, { postRecipe })(withStyles(styles)(PostRecipe));
+export default connect(mapStateToProps, { postRecipe, clearErrors })(withStyles(styles)(PostRecipe));
