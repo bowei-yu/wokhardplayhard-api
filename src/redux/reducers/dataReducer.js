@@ -29,6 +29,9 @@ export default function(state = initialState, action) {
             let index = state.recipes.findIndex((recipe) => 
                 recipe.recipeId === action.payload.recipeId);
             state.recipes[index] = action.payload;
+            if (state.recipe.recipeId === action.payload.recipeId) {
+                state.recipe = action.payload;
+            }
             return {
                 ...state
             };
