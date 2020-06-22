@@ -1,4 +1,4 @@
-import { SET_RECIPES, LIKE_RECIPE, UNLIKE_RECIPE, LOADING_DATA, DELETE_RECIPE } from '../types';
+import { SET_RECIPES, LIKE_RECIPE, UNLIKE_RECIPE, LOADING_DATA, DELETE_RECIPE, POST_RECIPE } from '../types';
 
 const initialState = {
     recipes: [],
@@ -33,6 +33,14 @@ export default function(state = initialState, action) {
             state.recipes.splice(index2, 1);
             return {
                 ...state
+            };
+        case POST_RECIPE:
+            return {
+                ...state,
+                recipes: [
+                    action.payload,
+                    ...state.recipes
+                ]
             };
         default:
             return state;
