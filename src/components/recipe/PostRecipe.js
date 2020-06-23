@@ -1,7 +1,7 @@
 import React, { Component, Fragment } from 'react';
 import PropTypes from 'prop-types';
 import withStyles from '@material-ui/core/styles/withStyles';
-import MyButton from '../util/MyButton';
+import MyButton from '../../util/MyButton';
 
 // icons
 import AddIcon from '@material-ui/icons/Add';
@@ -17,7 +17,7 @@ import CircularProgress from '@material-ui/core/CircularProgress';
 
 // redux stuff
 import { connect } from 'react-redux';
-import { postRecipe, clearErrors } from '../redux/actions/dataActions';
+import { postRecipe, clearErrors } from '../../redux/actions/dataActions';
 
 const styles = theme => ({
     ...theme.spreadThis,

@@ -1,8 +1,9 @@
 import React, { Component, Fragment } from 'react';
 import PropTypes from 'prop-types';
 import withStyles from '@material-ui/core/styles/withStyles';
-import MyButton from '../util/MyButton';
+import MyButton from '../../util/MyButton';
 import LikeButton from './LikeButton';
+import Comments from './Comments';
 import dayjs from 'dayjs';
 import { Link } from 'react-router-dom';
 
@@ -22,14 +23,11 @@ import Typography from '@material-ui/core/Typography';
 
 // redux stuff
 import { connect } from 'react-redux';
-import { getRecipe } from '../redux/actions/dataActions';
+import { getRecipe } from '../../redux/actions/dataActions';
 
 const styles = theme => ({
     ...theme.spreadThis,
-    invisibleSeparator: {
-        border: 'none',
-        margin: 4
-    },
+    
     profileImage: {
         width: 200,
         height: 200,
@@ -71,7 +69,7 @@ class RecipeDialog extends Component {
 
     render() {
 
-        const { classes, recipe: {recipeId, body, createdAt, likeCount, commentCount, userImage, userHandle},
+        const { classes, recipe: {recipeId, body, createdAt, likeCount, commentCount, userImage, userHandle, comments},
         UI: { loading } } = this.props;
 
         const dialogMarkup = loading ? (
@@ -107,6 +105,8 @@ class RecipeDialog extends Component {
                     </MyButton>
                     <span>{commentCount} Comments</span>
                 </Grid>
+                <hr className={classes.visibleSeparator} />
+                <Comments comments={comments}/>
             </Grid>
         );
 
