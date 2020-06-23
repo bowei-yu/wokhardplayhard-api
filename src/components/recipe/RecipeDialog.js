@@ -4,6 +4,7 @@ import withStyles from '@material-ui/core/styles/withStyles';
 import MyButton from '../../util/MyButton';
 import LikeButton from './LikeButton';
 import Comments from './Comments';
+import CommentForm from './CommentForm';
 import dayjs from 'dayjs';
 import { Link } from 'react-router-dom';
 
@@ -23,7 +24,7 @@ import Typography from '@material-ui/core/Typography';
 
 // redux stuff
 import { connect } from 'react-redux';
-import { getRecipe } from '../../redux/actions/dataActions';
+import { getRecipe, clearErrors } from '../../redux/actions/dataActions';
 
 const styles = theme => ({
     ...theme.spreadThis,
@@ -65,6 +66,7 @@ class RecipeDialog extends Component {
 
     handleClose = () => {
         this.setState({ open: false });
+        this.props.clearErrors();
     };
 
     render() {
@@ -106,6 +108,7 @@ class RecipeDialog extends Component {
                     <span>{commentCount} Comments</span>
                 </Grid>
                 <hr className={classes.visibleSeparator} />
+                <CommentForm recipeId={recipeId} />
                 <Comments comments={comments}/>
             </Grid>
         );
@@ -129,6 +132,7 @@ class RecipeDialog extends Component {
 };
 
 RecipeDialog.propTypes = {
+    clearErrors: PropTypes.func.isRequired,
     getRecipe: PropTypes.func.isRequired,
     recipeId: PropTypes.string.isRequired,
     userHandle: PropTypes.string.isRequired,
@@ -142,7 +146,7 @@ const mapStateToProps = state => ({
 });
 
 const mapActionsToProps = {
-    getRecipe
+    getRecipe, clearErrors
 };
 
 export default connect(mapStateToProps, mapActionsToProps)(withStyles(styles)(RecipeDialog));

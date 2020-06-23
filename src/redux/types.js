@@ -18,3 +18,4 @@ export const LIKE_RECIPE = 'LIKE_RECIPE';
 export const UNLIKE_RECIPE = 'UNLIKE_RECIPE';
 export const DELETE_RECIPE = 'DELETE_RECIPE';
 export const POST_RECIPE = "POST_RECIPE";
+export const SUBMIT_COMMENT = 'SUBMIT_COMMENT';
