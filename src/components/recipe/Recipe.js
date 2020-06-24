@@ -76,7 +76,7 @@ class Recipe extends Component {
                         <ChatIcon color="primary"/>
                     </MyButton>
                     <span>{commentCount} Comments</span>
-                    <RecipeDialog recipeId={recipeId} userHandle={userHandle}/>
+                    <RecipeDialog recipeId={recipeId} userHandle={userHandle} openDialog={this.props.openDialog} />
                </CardContent>
             </Card>
         );
@@ -86,7 +86,8 @@ class Recipe extends Component {
 Recipe.propTypes = {
     user: PropTypes.object.isRequired,
     recipe: PropTypes.object.isRequired,
-    classes: PropTypes.object.isRequired
+    classes: PropTypes.object.isRequired,
+    openDialog: PropTypes.bool
 };
 
 const mapStateToProps = state => ({

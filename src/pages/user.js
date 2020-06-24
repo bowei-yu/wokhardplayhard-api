@@ -11,11 +11,18 @@ import { getUserData } from '../redux/actions/dataActions';
 class user extends Component {
 
     state = {
-        profile: null
+        profile: null,
+        recipeIdParam: null
     };
 
     componentDidMount() {
         const handle = this.props.match.params.handle;
+        const recipeId = this.props.match.params.recipeId;
+
+        if (recipeId) {
+            this.setState({ recipeIdParam: recipeId });
+        };
+
         this.props.getUserData(handle);
         axios.get(`/user/${handle}`)
         .then(res => {
@@ -28,15 +35,24 @@ class user extends Component {
 
     render() {
         const { recipes, loading } = this.props.data;
+        const { recipeIdParam } = this.state;
 
         const recipesMarkup = loading ? (
             <p> Loading data... </p> 
         ) : recipes === null ? (
             <p> No recipes from this user </p>
+        ) : !recipeIdParam ? (
+            recipes.map(recipe => <Recipe key={recipe.recipeId} recipe={recipe}/>)
         ) : (
-            recipes.map(recipe => <Recipe key={recipe.recipeId}
-                recipe={recipe}/>)
-        )
+            recipes.map(recipe => {
+                if (recipe.recipeId !== recipeIdParam) {
+                    return <Recipe key={recipe.recipeId} recipe={recipe}/>
+                } else {
+                    return <Recipe key={recipe.recipeId} recipe={recipe} openDialog />
+                }
+            })
+        );
+
         return (
             <Grid container spacing={10}>
                 <Grid item sm={8} xs ={12}>

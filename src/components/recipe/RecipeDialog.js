@@ -14,8 +14,6 @@ import UnfoldMore from '@material-ui/icons/UnfoldMore';
 import ChatIcon from '@material-ui/icons/Chat';
 
 // MUI stuff
-import Button from '@material-ui/core/Button';
-import TextField from '@material-ui/core/TextField';
 import Dialog from '@material-ui/core/Dialog';
 import DialogContent from '@material-ui/core/DialogContent';
 import CircularProgress from '@material-ui/core/CircularProgress';
@@ -56,15 +54,34 @@ const styles = theme => ({
 class RecipeDialog extends Component {
 
     state= {
-        open: false
+        open: false,
+        oldPath: '',
+        newPath: ''
+    };
+
+    componentDidMount() {
+        if (this.props.openDialog) {
+            this.handleOpen();
+        };
     };
 
     handleOpen = () => {
-        this.setState({ open: true });
+        let oldPath = window.location.pathname;
+        const { userHandle, recipeId } = this.props;
+        const newPath = `/users/${userHandle}/recipe/${recipeId}`;
+
+        if (oldPath === newPath) {
+            oldPath = `/users/${userHandle}`;
+        }
+        
+        window.history.pushState(null, null, newPath);
+
+        this.setState({ open: true, oldPath, newPath });
         this.props.getRecipe(this.props.recipeId);
     };
 
     handleClose = () => {
+        window.history.pushState(null, null, this.state.oldPath);
         this.setState({ open: false });
         this.props.clearErrors();
     };

@@ -19,7 +19,7 @@ export const getRecipes = () => dispatch => {
     });
 };
 
-export const getRecipe = (recipeId) => dispatch => {
+export const getRecipe = (recipeId) => (dispatch) => {
     dispatch({ type: LOADING_UI});
     axios.get(`/recipe/${recipeId}`)
     .then(res => {
