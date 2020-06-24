@@ -69,7 +69,9 @@ class Recipe extends Component {
                     {deleteButton}
                     <Typography variant="body2" color="textSecondary"> 
                     {dayjs(createdAt).fromNow()} </Typography>
-                    <Typography variant="body1">{body} </Typography>
+                    <Typography variant="body1" style={{whiteSpace: 'pre-line'}}>
+                        {body} 
+                    </Typography>
                     <LikeButton recipeId={recipeId}/>
                     <span>{likeCount} Likes</span>
                     <MyButton tip="Comments">

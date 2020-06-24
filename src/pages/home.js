@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import Grid from '@material-ui/core/Grid';
 import PropTypes from 'prop-types';
+import RecipeSkeleton from '../util/RecipeSkeleton';
 
 import Recipe from '../components/recipe/Recipe';
 import Profile from '../components/profile/Profile';
@@ -20,7 +21,7 @@ class home extends Component {
 
         let recentRecipesMarkup = !loading ? (
             recipes.map((recipe) => <Recipe key={recipe.recipeId} recipe={recipe}/>)) 
-            : (<p> Loading... </p>);
+            : (<RecipeSkeleton/>);
         return (
             <Grid container spacing={10}>
                 <Grid item sm={8} xs ={12}>
