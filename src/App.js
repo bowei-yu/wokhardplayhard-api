@@ -21,9 +21,12 @@ import home from './pages/home';
 import login from './pages/login';
 import signup from './pages/signup';
 import user from './pages/user';
+
 import axios from 'axios';
 
 const theme = createMuiTheme(themeObject);
+
+axios.defaults.baseURL = 'https://asia-east2-wokhardplayhard-social.cloudfunctions.net/api';
 
 const token = localStorage.FBIdToken;
 if (token) {
