@@ -40,9 +40,7 @@ class search extends Component {
         const { recipes, loading } = this.props.data;
 
         const filterRecipes = (query, recipes) => {
-            if (query === '') {
-                return recipes;
-            }
+            
             if (query.charAt(query.length - 1) === ' ') {
                 query = query.substring(0, query.length - 1);
             }
@@ -54,7 +52,7 @@ class search extends Component {
                 current = recipes[r].body.toLowerCase();
                 currentUser = recipes[r].userHandle.toLowerCase();
                 for (let q = 0; q < querywords.length; q++) {
-                    if ((current.split(' ').includes(querywords[q]) || currentUser.indexOf(querywords[q]) > -1)
+                    if ((current.indexOf(querywords[q]) > -1 || currentUser.indexOf(querywords[q]) > -1)
                     && !filteredRecipes.includes(recipes[r])) {
                         filteredRecipes.push(recipes[r]);
                     }
