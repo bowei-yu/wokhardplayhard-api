@@ -15,7 +15,8 @@ const styles = theme => ({
     ...theme.spreadThis,
     input: {
         width: '99%',
-        height: '56px'
+        height: '56px',
+        textAlign: 'center'
     }
 });
 
@@ -37,12 +38,32 @@ class search extends Component {
 
         const { classes } = this.props;
         const { recipes, loading } = this.props.data;
-        let filteredRecipes = recipes.filter(
-            (recipe) => {
-                return (recipe.body.toLowerCase().indexOf(this.state.search.toLowerCase()) !== -1)
-                || (recipe.userHandle.toLowerCase().indexOf(this.state.search.toLowerCase()) !== -1);
+
+        const filterRecipes = (query, recipes) => {
+            if (query === '') {
+                return recipes;
             }
-        );
+            if (query.charAt(query.length - 1) === ' ') {
+                query = query.substring(0, query.length - 1);
+            }
+            const querywords = query.toLowerCase().split(' ');
+            let current = '';
+            let currentUser = '';
+            let filteredRecipes = [];
+            for (let r = 0; r < recipes.length; r++) {
+                current = recipes[r].body.toLowerCase();
+                currentUser = recipes[r].userHandle.toLowerCase();
+                for (let q = 0; q < querywords.length; q++) {
+                    if ((current.split(' ').includes(querywords[q]) || currentUser.indexOf(querywords[q]) > -1)
+                    && !filteredRecipes.includes(recipes[r])) {
+                        filteredRecipes.push(recipes[r]);
+                    }
+                }
+            }
+            return filteredRecipes;
+        };
+
+        let filteredRecipes = filterRecipes(this.state.search, recipes);
         let recentRecipesMarkup = !loading ? (
             filteredRecipes.map((recipe) => <Recipe key={recipe.recipeId} recipe={recipe}/>)) 
             : (<RecipeSkeleton/>);
@@ -50,11 +71,12 @@ class search extends Component {
         return (
             <Grid container spacing={10}>
                 <Grid item sm={8} xs ={12}>
+                    <hr/>
                     <input type="text" 
                     value={this.state.search}
                     onChange={this.updateSearch.bind(this)}
                     className={classes.input}
-                    placeholder="  Search for recipes or users through keywords here"/>
+                    placeholder="Type your search for recipe name, ingredients and users here:"/>
                     <hr/>
                     {recentRecipesMarkup}
                 </Grid>

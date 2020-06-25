@@ -57,8 +57,7 @@ class Recipe extends Component {
         return (
             <Card className={classes.card}>
                 <Grid item sm={2}>
-                    <img src={userImage} alt="comment" 
-                    className={classes.image}/>
+                    <img src={userImage} alt="Profile" className={classes.image}/>
                 </Grid>
                < CardContent className ={classes.content}>
                     <Typography variants="h5" component={Link} to={`/users/${userHandle}`} color="primary"> {userHandle} </Typography>
