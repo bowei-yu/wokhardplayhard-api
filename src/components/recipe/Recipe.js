@@ -11,20 +11,9 @@ import LikeButton from './LikeButton';
 
 // MUI Stuff
 import Card from '@material-ui/core/Card';
-import CardMedia from '@material-ui/core/CardMedia';
 import CardContent from '@material-ui/core/CardContent';
 import Typography from '@material-ui/core/Typography';
-// import clsx from 'clsx';
-// import CardHeader from '@material-ui/core/CardHeader';
-// import CardActions from '@material-ui/core/CardActions';
-// import Collapse from '@material-ui/core/Collapse';
-// import Avatar from '@material-ui/core/Avatar';
-// import IconButton from '@material-ui/core/IconButton';
-// import { red } from '@material-ui/core/colors';
-// import FavoriteIcon from '@material-ui/icons/Favorite';
-// import ShareIcon from '@material-ui/icons/Share';
-// import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
-// import MoreVertIcon from '@material-ui/icons/MoreVert';
+import Grid from '@material-ui/core/Grid';
 
 // icons
 import ChatIcon from '@material-ui/icons/Chat';
@@ -39,7 +28,11 @@ const styles = {
         marginBottom: 20,
     },
     image: {
-        minWidth: 200,
+        padding: 25,
+        width: 100,
+        height: 100,
+        objectFit: 'cover',
+        borderRadius: 100
     },
     content: {
         padding: 25,
@@ -63,7 +56,10 @@ class Recipe extends Component {
 
         return (
             <Card className={classes.card}>
-                <CardMedia image={userImage} title="Profile image" className={classes.image}/>
+                <Grid item sm={2}>
+                    <img src={userImage} alt="comment" 
+                    className={classes.image}/>
+                </Grid>
                < CardContent className ={classes.content}>
                     <Typography variants="h5" component={Link} to={`/users/${userHandle}`} color="primary"> {userHandle} </Typography>
                     {deleteButton}
