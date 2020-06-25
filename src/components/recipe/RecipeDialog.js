@@ -114,7 +114,7 @@ class RecipeDialog extends Component {
                             {dayjs(createdAt).format('h:mm a, MMMM DD YYYY')} 
                         </Typography>
                         <hr className={classes.invisibleSeparator}/>
-                        <Typography varaint="body1">
+                        <Typography varaint="body1" style={{whiteSpace: 'pre-line'}}>
                             {body}
                         </Typography>
                         <LikeButton recipeId={recipeId}/>

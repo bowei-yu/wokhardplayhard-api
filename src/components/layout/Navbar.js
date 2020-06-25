@@ -13,6 +13,7 @@ import Button from '@material-ui/core/Button';
 
 // icons
 import HomeIcon from '@material-ui/icons/Home';
+import SearchIcon from '@material-ui/icons/Search';
 
 class Navbar extends Component {
 
@@ -32,12 +33,18 @@ class Navbar extends Component {
                             </MyButton>
                         </Link>
                         <Notifications/>
+                        <Link to="/search">
+                            <MyButton tip="Search">
+                                <SearchIcon/>
+                            </MyButton>
+                        </Link>
                     </Fragment>)
                     : (
                     <Fragment>
+                        <Button color ="inherit" component={Link} to="/signup"> Signup </Button>
                         <Button color ="inherit" component={Link} to="/login"> Login </Button>
                         <Button color ="inherit" component={Link} to="/"> Home </Button>
-                        <Button color ="inherit" component={Link} to="/signup"> Signup </Button>
+                        <Button color = "inherit" component={Link} to="/search"> Search </Button>
                     </Fragment>)
                     }
                </Toolbar>

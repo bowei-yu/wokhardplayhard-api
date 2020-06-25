@@ -21,6 +21,7 @@ import home from './pages/home';
 import login from './pages/login';
 import signup from './pages/signup';
 import user from './pages/user';
+import search from './pages/search';
 
 import axios from 'axios';
 
@@ -55,6 +56,7 @@ class App extends Component {
                 <AuthRoute exact path = "/signup" component = {signup}/>
                 <Route exaat path="/users/:handle" component={user} />
                 <Route exact path="/users/:handle/recipe/:recipeId" component={user}/>
+                <Route exact path="/search" component={search}/>
               </Switch>
               </div>
           </Router>
