@@ -17,6 +17,7 @@ import Grid from '@material-ui/core/Grid';
 
 // icons
 import ChatIcon from '@material-ui/icons/Chat';
+import LocalDiningIcon from '@material-ui/icons/LocalDining';
 
 // redux
 import { connect } from 'react-redux';
@@ -46,7 +47,7 @@ class Recipe extends Component {
         dayjs.extend(relativeTime);
         // same as const classes = this.props.classes
         const { classes, 
-                recipe: {body, createdAt, userImage, userHandle, recipeId, likeCount, commentCount}, 
+                recipe: {difficultyRating, body, createdAt, userImage, userHandle, recipeId, likeCount, commentCount}, 
                 user: { authenticated, credentials: { handle }} 
         } = this.props;
 
@@ -73,6 +74,10 @@ class Recipe extends Component {
                         <ChatIcon color="primary"/>
                     </MyButton>
                     <span>{commentCount} Comments</span>
+                    <MyButton tip="Difficulty">
+                        <LocalDiningIcon color="primary"/>
+                    </MyButton>
+                    <span>Difficulty Level: {Math.ceil(difficultyRating)}</span>
                     <RecipeDialog recipeId={recipeId} userHandle={userHandle} openDialog={this.props.openDialog} />
                </CardContent>
             </Card>

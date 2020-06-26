@@ -5,6 +5,7 @@ import MyButton from '../../util/MyButton';
 import LikeButton from './LikeButton';
 import Comments from './Comments';
 import CommentForm from './CommentForm';
+import RateDifficulty from './RateDifficulty';
 import dayjs from 'dayjs';
 import { Link } from 'react-router-dom';
 
@@ -12,6 +13,7 @@ import { Link } from 'react-router-dom';
 import CloseIcon from '@material-ui/icons/Close';
 import UnfoldMore from '@material-ui/icons/UnfoldMore';
 import ChatIcon from '@material-ui/icons/Chat';
+import LocalDiningIcon from '@material-ui/icons/LocalDining';
 
 // MUI stuff
 import Dialog from '@material-ui/core/Dialog';
@@ -26,10 +28,10 @@ import { getRecipe, clearErrors } from '../../redux/actions/dataActions';
 
 const styles = theme => ({
     ...theme.spreadThis,
-    
+
     profileImage: {
-        width: 200,
-        height: 200,
+        width: 150,
+        height: 150,
         borderRadius: '50%',
         objectFit: 'cover'
     },
@@ -88,7 +90,7 @@ class RecipeDialog extends Component {
 
     render() {
 
-        const { classes, recipe: {recipeId, body, createdAt, likeCount, commentCount, userImage, userHandle, comments},
+        const { classes, recipe: {recipeId, body, createdAt, likeCount, commentCount, userImage, userHandle, comments, difficultyRating},
         UI: { loading } } = this.props;
 
         const dialogMarkup = loading ? (
@@ -97,10 +99,9 @@ class RecipeDialog extends Component {
             </div>
         ) : (
             <Grid container spacing={10}>
-                <Grid item sm={5}>
+                <Grid item xxxs={11}>
                     <img src={userImage} alt="Profile" className={classes.profileImage}/>
-                </Grid>
-                <Grid item sm={7}>
+                    <hr className={classes.invisibleSeparator}/>
                     <Typography
                         component={Link}
                         color="primary"
@@ -117,15 +118,21 @@ class RecipeDialog extends Component {
                         <Typography varaint="body1" style={{whiteSpace: 'pre-line'}}>
                             {body}
                         </Typography>
+                        <hr className={classes.invisibleSeparator}/>
                         <LikeButton recipeId={recipeId}/>
                         <span>{likeCount} Likes</span>
                         <MyButton tip="Comments">
-                        <ChatIcon color="primary"/>
-                    </MyButton>
-                    <span>{commentCount} Comments</span>
+                            <ChatIcon color="primary"/>
+                        </MyButton>
+                        <span>{commentCount} Comments</span>
+                        <MyButton tip="Difficulty">
+                            <LocalDiningIcon color="primary"/>
+                        </MyButton>
+                        <span>Difficulty Level:  {Math.ceil(difficultyRating)} </span>
                 </Grid>
                 <hr className={classes.visibleSeparator} />
-                <CommentForm recipeId={recipeId} />
+                <RateDifficulty recipeId={recipeId} />
+                <CommentForm recipeId={recipeId}/>
                 <Comments comments={comments}/>
             </Grid>
         );
