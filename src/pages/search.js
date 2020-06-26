@@ -53,15 +53,27 @@ class search extends Component {
             let current = '';
             let currentUser = '';
             let filteredRecipes = [];
+            let filterCounter = new Map();
             for (let r = 0; r < recipes.length; r++) {
                 current = recipes[r].body.toLowerCase();
                 currentUser = recipes[r].userHandle.toLowerCase();
                 for (let q = 0; q < querywords.length; q++) {
-                    if ((current.indexOf(querywords[q]) > -1 || currentUser.indexOf(querywords[q]) > -1)
-                    && !filteredRecipes.includes(recipes[r])) {
-                        filteredRecipes.push(recipes[r]);
+                    if (current.indexOf(querywords[q]) > -1 || currentUser.indexOf(querywords[q]) > -1) {
+                        if (!filterCounter.has(recipes[r])) {
+                            filterCounter.set(recipes[r], 1);
+                        } else {
+                            filterCounter.set(recipes[r], filterCounter.get(recipes[r]) + 1);
+                        }
                     }
                 }
+            }
+
+            filterCounter[Symbol.iterator] = function* () {
+                yield* [...this.entries()].sort((a, b) => b[1] - a[1]);
+            }
+
+            for (let [key] of filterCounter) {
+                filteredRecipes.push(key);
             }
             return filteredRecipes;
         };
