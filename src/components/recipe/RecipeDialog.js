@@ -132,7 +132,9 @@ class RecipeDialog extends Component {
                 </Grid>
                 <hr className={classes.visibleSeparator} />
                 <RateDifficulty recipeId={recipeId} />
+                <hr className={classes.visibleSeparator} />
                 <CommentForm recipeId={recipeId}/>
+                <hr className={classes.visibleSeparator} />
                 <Comments comments={comments}/>
             </Grid>
         );
