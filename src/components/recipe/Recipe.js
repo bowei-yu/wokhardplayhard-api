@@ -36,7 +36,7 @@ const styles = {
         borderRadius: 100
     },
     content: {
-        padding: 25,
+        padding: 20,
         objectFit: 'cover'
     }
 };
@@ -65,7 +65,7 @@ class Recipe extends Component {
                     {deleteButton}
                     <Typography variant="body2" color="textSecondary"> 
                     {dayjs(createdAt).fromNow()} </Typography>
-                    <Typography variant="body1" style={{whiteSpace: 'pre-line'}}>
+                    <Typography variant="body2" style={{whiteSpace: 'pre-line'}}>
                         {body} 
                     </Typography>
                     <LikeButton recipeId={recipeId}/>

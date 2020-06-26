@@ -82,7 +82,7 @@ class PostRecipe extends Component {
                 <MyButton onClick={this.handleOpen} tip="Post a recipe! ">
                     <AddIcon />
                 </MyButton>
-                <Dialog open={this.state.open} onClose={this.handleClose} fullWidth maxWidth="sm">
+                <Dialog open={this.state.open} onClose={this.handleClose} fullWidth maxWidth="md">
                     <MyButton tip="Close" onClick={this.handleClose} tipClassName= {classes.closeButton}>
                         <CloseIcon/>
                     </MyButton>
