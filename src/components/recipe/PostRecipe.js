@@ -86,16 +86,26 @@ class PostRecipe extends Component {
                     <MyButton tip="Close" onClick={this.handleClose} tipClassName= {classes.closeButton}>
                         <CloseIcon/>
                     </MyButton>
-                    <DialogTitle>Post a new Recipe</DialogTitle>
+                    <DialogTitle>Post a recipe / Share your cooking experience here </DialogTitle>
                     <DialogContent>
                         <form onSubmit={this.handleSubmit}>
                             <TextField
                             name="body"
                             type="text"
-                            label="Recipe!"
+                            label="Recipe/Thoughts:"
                             multiline
-                            rows="10"
-                            placeholder="New recipe here"
+                            rows="15"
+                            defaultValue="Name of recipe/dish: 
+----------------------------------------------------------------------------------------------
+Picture/video link (if any): 
+----------------------------------------------------------------------------------------------
+Ingredients (do state quantity): 
+- 
+----------------------------------------------------------------------------------------------
+Estimated cooking time: 
+----------------------------------------------------------------------------------------------
+Directions:
+1) "
                             error={errors.body ? true : false }
                             helperText={errors.body}
                             className={classes.textField}

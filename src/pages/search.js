@@ -10,13 +10,18 @@ import { connect } from 'react-redux';
 import { getRecipes } from '../redux/actions/dataActions';
 
 import withStyles from '@material-ui/core/styles/withStyles';
+import { Typography } from '@material-ui/core';
 
 const styles = theme => ({
     ...theme.spreadThis,
     input: {
         width: '99%',
         height: '56px',
-        textAlign: 'center'
+        textAlign: 'center',
+        marginBottom: 10
+    },
+    instructions: {
+        marginBottom: 10
     }
 });
 
@@ -69,12 +74,15 @@ class search extends Component {
         return (
             <Grid container spacing={10}>
                 <Grid item sm={8} xs ={12}>
-                    <hr/>
+                    <Typography variant="body2" className={classes.instructions}>
+                        Type your search for recipe name, ingredients and user keywords here, 
+                        leaving only a space between words:
+                    </Typography>
                     <input type="text" 
                     value={this.state.search}
                     onChange={this.updateSearch.bind(this)}
                     className={classes.input}
-                    placeholder="Type your search for recipe name, ingredients and users here:"/>
+                    placeholder="eg. milk jane cereal"/>
                     <hr/>
                     {recentRecipesMarkup}
                 </Grid>
