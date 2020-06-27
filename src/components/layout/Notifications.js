@@ -95,7 +95,7 @@ class Notifications extends Component {
 
         return (
             <Fragment>
-                <Tooltip placement="top" title="notifications">
+                <Tooltip placement="top" title="Notifications">
                     <IconButton aria-owns={anchorEl 
                         ? 'simple-menu'
                         : undefined }

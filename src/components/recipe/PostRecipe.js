@@ -79,20 +79,20 @@ class PostRecipe extends Component {
         const { classes, UI: { loading }} = this.props;
         return (
             <Fragment>
-                <MyButton onClick={this.handleOpen} tip="Post a recipe! ">
+                <MyButton onClick={this.handleOpen} tip="Create a new post ">
                     <AddIcon />
                 </MyButton>
                 <Dialog open={this.state.open} onClose={this.handleClose} fullWidth maxWidth="md">
                     <MyButton tip="Close" onClick={this.handleClose} tipClassName= {classes.closeButton}>
                         <CloseIcon/>
                     </MyButton>
-                    <DialogTitle>Post a recipe / Share your cooking experience here </DialogTitle>
+                    <DialogTitle>Share your recipe, questions or cooking experience here: </DialogTitle>
                     <DialogContent>
                         <form onSubmit={this.handleSubmit}>
                             <TextField
                             name="body"
                             type="text"
-                            label="Recipe/Thoughts:"
+                            label="The template below serves as a guideline for your recipe"
                             multiline
                             rows="15"
                             defaultValue="Name of recipe/dish: 
