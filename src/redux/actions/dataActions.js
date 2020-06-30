@@ -106,7 +106,7 @@ export const submitRating = (recipeId, rating) => (dispatch) => {
     .catch(err => {
         dispatch({
             type: SET_ERRORS,
-            payload: null
+            payload: err.response.data
         });
     });
 };
