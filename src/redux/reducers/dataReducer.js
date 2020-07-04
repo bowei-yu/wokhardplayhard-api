@@ -1,4 +1,4 @@
-import { SET_RECIPES, LIKE_RECIPE, UNLIKE_RECIPE, LOADING_DATA, DELETE_RECIPE, POST_RECIPE, SET_RECIPE, SUBMIT_COMMENT, SUBMIT_RATING} from '../types';
+import { SET_RECIPES, LIKE_RECIPE, UNLIKE_RECIPE, LOADING_DATA, DELETE_RECIPE, POST_RECIPE, SET_RECIPE, SUBMIT_COMMENT, SUBMIT_RATING, DELETE_COMMENT} from '../types';
 
 const initialState = {
     recipes: [],
@@ -41,6 +41,16 @@ export default function(state = initialState, action) {
             state.recipes.splice(index2, 1);
             return {
                 ...state
+            };
+        case DELETE_COMMENT:
+            let index3 = state.recipe.comments.findIndex(comment => comment.commentId === action.payload);
+            state.recipe.comments.splice(index3, 1);
+            return {
+                ...state,
+                recipe: {
+                    ...state.recipe,
+                    comments: [...state.recipe.comments]
+                }
             };
         case POST_RECIPE:
             return {

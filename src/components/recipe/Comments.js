@@ -3,6 +3,8 @@ import PropTypes from 'prop-types';
 import withStyles from '@material-ui/core/styles/withStyles';
 import { Link } from 'react-router-dom';
 import dayjs from 'dayjs';
+import { connect } from 'react-redux';
+import DeleteComment from './DeleteComment';
 
 // MUI
 import Grid from '@material-ui/core/Grid';
@@ -25,11 +27,14 @@ const styles = theme => ({
 class Comments extends Component {
 
     render() {
-        const { comments, classes } = this.props;
+        const { comments, classes, user: { authenticated, credentials: { handle }} } = this.props;
         return (
             <Grid container>
                 {comments.map((comment, index) => {
-                    const { body, createdAt, userImage, userHandle } = comment;
+                    const { body, createdAt, userImage, userHandle, recipeId, commentId} = comment;
+                    const deleteButton = authenticated && userHandle === handle ? (
+                        <DeleteComment recipeId={recipeId} commentId={commentId}/>
+                    ) : null;
                     return (
                         <Fragment key={createdAt}>
                             <Grid item sm={12}>
@@ -51,6 +56,7 @@ class Comments extends Component {
                                             </Typography>
                                             <hr className={classes.invisibleSeparator}/>
                                             <Typography variant="body1">{body}</Typography>
+                                            {deleteButton}
                                         </div>
                                     </Grid>
                                 </Grid>
@@ -67,7 +73,12 @@ class Comments extends Component {
 };
 
 Comments.propTypes = {
-    comments: PropTypes.array.isRequired
+    comments: PropTypes.array.isRequired,
+    user: PropTypes.object.isRequired
 };
 
-export default withStyles(styles)(Comments);
+const mapStateToProps = state => ({
+    user: state.user
+});
+
+export default connect(mapStateToProps)(withStyles(styles)(Comments));

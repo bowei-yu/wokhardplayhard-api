@@ -24,7 +24,7 @@ import Typography from '@material-ui/core/Typography';
 
 // redux stuff
 import { connect } from 'react-redux';
-import { getRecipe, clearErrors } from '../../redux/actions/dataActions';
+import { getRecipe, clearErrors, getRecipes } from '../../redux/actions/dataActions';
 
 const styles = theme => ({
     ...theme.spreadThis,
@@ -86,6 +86,7 @@ class RecipeDialog extends Component {
         window.history.pushState(null, null, this.state.oldPath);
         this.setState({ open: false });
         this.props.clearErrors();
+        this.props.getRecipes(); // added so as to update number of comments/difficulty rating
     };
 
     render() {
@@ -160,6 +161,7 @@ class RecipeDialog extends Component {
 RecipeDialog.propTypes = {
     clearErrors: PropTypes.func.isRequired,
     getRecipe: PropTypes.func.isRequired,
+    getRecipes: PropTypes.func.isRequired,
     recipeId: PropTypes.string.isRequired,
     userHandle: PropTypes.string.isRequired,
     recipe: PropTypes.object.isRequired,
@@ -172,7 +174,7 @@ const mapStateToProps = state => ({
 });
 
 const mapActionsToProps = {
-    getRecipe, clearErrors
+    getRecipe, clearErrors, getRecipes
 };
 
 export default connect(mapStateToProps, mapActionsToProps)(withStyles(styles)(RecipeDialog));

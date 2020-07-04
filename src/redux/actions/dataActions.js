@@ -1,4 +1,4 @@
-import { SET_RECIPES, LOADING_DATA, LIKE_RECIPE, UNLIKE_RECIPE, DELETE_RECIPE, SET_ERRORS, POST_RECIPE , CLEAR_ERRORS, LOADING_UI, SET_RECIPE, STOP_LOADING_UI, SUBMIT_COMMENT, SUBMIT_RATING } from '../types';
+import { SET_RECIPES, LOADING_DATA, LIKE_RECIPE, UNLIKE_RECIPE, DELETE_RECIPE, SET_ERRORS, POST_RECIPE , CLEAR_ERRORS, LOADING_UI, SET_RECIPE, STOP_LOADING_UI, SUBMIT_COMMENT, SUBMIT_RATING, DELETE_COMMENT } from '../types';
 import axios from 'axios';
 
 // get all recipes
@@ -116,6 +116,15 @@ export const deleteRecipe = (recipeId) => (dispatch) => {
     axios.delete(`/recipe/${recipeId}`)
     .then(() => {
         dispatch({ type: DELETE_RECIPE, payload: recipeId})
+    })
+    .catch(err => console.log(err));
+};
+
+// delete comment
+export const deleteComment = (recipeId, commentId) => (dispatch) => {
+    axios.delete(`/recipe/${recipeId}/comment/${commentId}`)
+    .then(() => {
+        dispatch({ type: DELETE_COMMENT, payload: commentId })
     })
     .catch(err => console.log(err));
 };

@@ -9,7 +9,7 @@ import TextField from '@material-ui/core/TextField';
 
 // redux stuff
 import { connect } from 'react-redux';
-import { submitRating } from '../../redux/actions/dataActions';
+import { submitRating, getRecipe } from '../../redux/actions/dataActions';
 
 const styles = theme => ({
     ...theme.spreadThis,
@@ -42,6 +42,7 @@ class RateDifficulty extends Component {
     handleSubmit = (event) => {
         event.preventDefault();
         this.props.submitRating(this.props.recipeId, { body: parseInt(this.state.body) });
+        this.props.getRecipe(this.props.recipeId); // added to update recipe rating
     };
 
     render() {
@@ -51,9 +52,11 @@ class RateDifficulty extends Component {
             <Grid item sm={12} style={{ textAlign: 'center'}}>
                 <form onSubmit={this.handleSubmit}>
                     <TextField 
+                    style={{width: 190}}
                     name="body"
                     type="number"
                     label="Rate difficulty from 1 - 10"
+                    inputProps={{ min: 1, max: 10}}
                     error={errors.rating ? true: false}
                     helperText={errors.rating}
                     value={this.state.body}
@@ -75,6 +78,7 @@ class RateDifficulty extends Component {
 
 RateDifficulty.propTypes = {
     submitRating: PropTypes.func.isRequired,
+    getRecipe: PropTypes.func.isRequired,
     UI: PropTypes.object.isRequired,
     classes: PropTypes.object.isRequired,
     recipeId: PropTypes.string.isRequired,
@@ -86,4 +90,4 @@ const mapStateToProps = state => ({
     authenticated: state.user.authenticated
 });
 
-export default connect(mapStateToProps, {submitRating})(withStyles(styles)(RateDifficulty));
+export default connect(mapStateToProps, {submitRating, getRecipe})(withStyles(styles)(RateDifficulty));
