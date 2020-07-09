@@ -7,6 +7,7 @@ import PropTypes from 'prop-types';
 import MyButton from '../../util/MyButton';
 import DeleteRecipe from './DeleteRecipe';
 import RecipeDialog from './RecipeDialog';
+import EditRecipe from './EditRecipe';
 import LikeButton from './LikeButton';
 
 // MUI Stuff
@@ -55,6 +56,10 @@ class Recipe extends Component {
             <DeleteRecipe recipeId={recipeId}/>
         ) : null;
 
+        const editButton = authenticated && userHandle === handle ? (
+            <EditRecipe recipe={this.props.recipe} />
+        ) : null;
+
         return (
             <Card className={classes.card}>
                 <Grid item sm={2}>
@@ -63,10 +68,11 @@ class Recipe extends Component {
                < CardContent className ={classes.content}>
                     <Typography variants="h5" component={Link} to={`/users/${userHandle}`} color="primary"> {userHandle} </Typography>
                     {deleteButton}
+                    {editButton}
                     <Typography variant="body2" color="textSecondary"> 
                     {dayjs(createdAt).fromNow()} </Typography>
                     <Typography variant="body2" style={{whiteSpace: 'pre-line'}}>
-                        {body} 
+                        {body.split('\n')[0]} 
                     </Typography>
                     <LikeButton recipeId={recipeId}/>
                     <span>{likeCount} Likes</span>

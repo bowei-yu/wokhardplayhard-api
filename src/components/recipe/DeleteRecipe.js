@@ -46,7 +46,7 @@ class DeleteRecipe extends Component {
 
         return (
             <Fragment> 
-                <MyButton tip="Delete recipe"
+                <MyButton tip="Delete post"
                 onClick={this.handleOpen}
                 btnClassName={classes.deleteButton}>
                     <DeleteOutline color="secondary"/>
@@ -57,7 +57,7 @@ class DeleteRecipe extends Component {
                     fullWidth
                     maxWidth="sm">
                         <DialogTitle>
-                            Are you sure you want to delete this recipe?
+                            Are you sure you want to delete this post?
                         </DialogTitle>
                         <DialogActions>
                             <Button onClick={this.handleClose} color="primary">
