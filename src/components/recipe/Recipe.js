@@ -48,7 +48,7 @@ class Recipe extends Component {
         dayjs.extend(relativeTime);
         // same as const classes = this.props.classes
         const { classes, 
-                recipe: {difficultyRating, body, createdAt, userImage, userHandle, recipeId, likeCount, commentCount}, 
+                recipe: {difficultyRating, title, body, cookTime, createdAt, userImage, userHandle, recipeId, likeCount, commentCount}, 
                 user: { authenticated, credentials: { handle }} 
         } = this.props;
 
@@ -71,8 +71,11 @@ class Recipe extends Component {
                     {editButton}
                     <Typography variant="body2" color="textSecondary"> 
                     {dayjs(createdAt).fromNow()} </Typography>
+                    <Typography variant="body1" style={{whiteSpace: 'pre-line'}}>
+                        {title}
+                    </Typography>
                     <Typography variant="body2" style={{whiteSpace: 'pre-line'}}>
-                        {body.split('\n')[0]} 
+                        { cookTime === undefined || cookTime === "" ? body.split('\n')[0] : "Estimated cooking time: " + cookTime} 
                     </Typography>
                     <LikeButton recipeId={recipeId}/>
                     <span>{likeCount} Likes</span>

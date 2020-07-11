@@ -45,6 +45,9 @@ class EditRecipe extends Component {
 
     state = {
         open: false,
+        title: this.props.recipe.title,
+        cookTime: this.props.recipe.cookTime,
+        ingredients: this.props.recipe.ingredients,
         body: this.props.recipe.body,
         errors: {}
     };
@@ -77,6 +80,9 @@ class EditRecipe extends Component {
     handleSubmit = (event) => {
         event.preventDefault();
         const editedRecipe = this.props.recipe;
+        editedRecipe.title = this.state.title;
+        editedRecipe.cookTime = this.state.cookTime;
+        editedRecipe.ingredients = this.state.ingredients;
         editedRecipe.body = this.state.body;
         this.props.editRecipe(editedRecipe, this.props.recipe.recipeId);
         this.props.getRecipes();
@@ -98,14 +104,45 @@ class EditRecipe extends Component {
                     <DialogContent>
                         <form onSubmit={this.handleSubmit}>
                             <TextField
+                            name="title"
+                            type="text"
+                            label="Edit Title / Recipe Name"
+                            defaultValue={this.props.recipe.title}
+                            error={errors.title ? true : false }
+                            helperText={errors.title}
+                            className={classes.textField}
+                            onChange={this.handleChange}
+                            fullWidth
+                            />
+                            <TextField
                             name="body"
                             type="text"
-                            label="Edit your post"
+                            label="Edit Description / Directions"
                             multiline
                             rows="15"
                             defaultValue={this.props.recipe.body}
                             error={errors.body ? true : false }
                             helperText={errors.body}
+                            className={classes.textField}
+                            onChange={this.handleChange}
+                            fullWidth
+                            />
+                            <TextField
+                            name="cookTime"
+                            type="text"
+                            label="Edit estimated cooking time"
+                            defaultValue={this.props.recipe.cookTime}
+                            className={classes.textField}
+                            onChange={this.handleChange}
+                            fullWidth
+                            />
+                            <TextField
+                            name="ingredients"
+                            type="text"
+                            label="Edit ingredients"
+                            multiline
+                            rows="15"
+                            defaultValue={this.props.recipe.ingredients}
                             className={classes.textField}
                             onChange={this.handleChange}
                             fullWidth

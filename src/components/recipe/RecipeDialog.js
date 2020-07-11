@@ -91,8 +91,11 @@ class RecipeDialog extends Component {
 
     render() {
 
-        const { classes, recipe: {recipeId, body, createdAt, likeCount, commentCount, userImage, userHandle, comments, difficultyRating},
+        const { classes, recipe: {recipeId, title, body, ingredients, cookTime, createdAt, likeCount, commentCount, userImage, userHandle, comments, difficultyRating},
         UI: { loading } } = this.props;
+
+        const recipeDirections = !ingredients ? null : <Typography variant="h6"> Directions </Typography>;
+        const recipeIngredients = !ingredients ? null : <Typography variant="h6"> Ingredients </Typography>;
 
         const dialogMarkup = loading ? (
             <div className={classes.spinnerDiv}>
@@ -116,7 +119,21 @@ class RecipeDialog extends Component {
                             {dayjs(createdAt).format('h:mm a, MMMM DD YYYY')} 
                         </Typography>
                         <hr className={classes.invisibleSeparator}/>
-                        <Typography varaint="body1" style={{whiteSpace: 'pre-line'}}>
+                        <Typography variant="h5" style={{whiteSpace: 'pre-line'}}>
+                            {title}
+                        </Typography>
+                        <hr className={classes.invisibleSeparator}/>
+                        <Typography variant="body1" style={{whiteSpace: 'pre-line'}}>
+                            {cookTime}
+                        </Typography>
+                        <hr className={classes.invisibleSeparator}/>
+                        {recipeIngredients}
+                        <Typography variant="body1" style={{whiteSpace: 'pre-line'}}>
+                            {ingredients}
+                        </Typography>
+                        <hr className={classes.invisibleSeparator}/>
+                        {recipeDirections}
+                        <Typography variant="body1" style={{whiteSpace: 'pre-line'}}>
                             {body}
                         </Typography>
                         <hr className={classes.invisibleSeparator}/>
