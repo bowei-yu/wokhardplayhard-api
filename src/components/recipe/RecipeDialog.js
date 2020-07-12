@@ -8,6 +8,7 @@ import CommentForm from './CommentForm';
 import RateDifficulty from './RateDifficulty';
 import dayjs from 'dayjs';
 import { Link } from 'react-router-dom';
+import ReactPlayer from 'react-player';
 
 // icons
 import CloseIcon from '@material-ui/icons/Close';
@@ -24,7 +25,7 @@ import Typography from '@material-ui/core/Typography';
 
 // redux stuff
 import { connect } from 'react-redux';
-import { getRecipe, clearErrors, getRecipes } from '../../redux/actions/dataActions';
+import { getRecipe, clearErrors } from '../../redux/actions/dataActions';
 
 const styles = theme => ({
     ...theme.spreadThis,
@@ -40,7 +41,7 @@ const styles = theme => ({
     },
     closeButton: {
         position: 'absolute',
-        left: '90%'
+        left: '92%'
     },
     expandButton: {
         position: 'absolute',
@@ -86,16 +87,17 @@ class RecipeDialog extends Component {
         window.history.pushState(null, null, this.state.oldPath);
         this.setState({ open: false });
         this.props.clearErrors();
-        this.props.getRecipes(); // added so as to update number of comments/difficulty rating
+        document.location.reload(); // added so as to update number of comments/difficulty rating
     };
 
     render() {
 
-        const { classes, recipe: {recipeId, title, body, ingredients, cookTime, createdAt, likeCount, commentCount, userImage, userHandle, comments, difficultyRating},
+        const { classes, recipe: {recipeId, title, body, ingredients, cookTime, videoLink, createdAt, likeCount, commentCount, userImage, userHandle, comments, difficultyRating},
         UI: { loading } } = this.props;
 
         const recipeDirections = !ingredients ? null : <Typography variant="h6"> Directions </Typography>;
         const recipeIngredients = !ingredients ? null : <Typography variant="h6"> Ingredients </Typography>;
+        const video = !videoLink ? null : <ReactPlayer url={videoLink}/>;
 
         const dialogMarkup = loading ? (
             <div className={classes.spinnerDiv}>
@@ -118,6 +120,8 @@ class RecipeDialog extends Component {
                         <Typography variant="body2" color="textSecondary">
                             {dayjs(createdAt).format('h:mm a, MMMM DD YYYY')} 
                         </Typography>
+                        <hr className={classes.invisibleSeparator}/>
+                            {video}
                         <hr className={classes.invisibleSeparator}/>
                         <Typography variant="h5" style={{whiteSpace: 'pre-line'}}>
                             {title}
@@ -162,7 +166,7 @@ class RecipeDialog extends Component {
                 <MyButton onClick={this.handleOpen} tip="Expand post" tipClassName={classes.expandButton}>
                     <UnfoldMore color="primary"/>
                 </MyButton>
-                <Dialog open={this.state.open} onClose={this.handleClose} fullWidth maxWidth="sm">
+                <Dialog open={this.state.open} onClose={this.handleClose} fullWidth maxWidth="md">
                     <MyButton tip="Close" onClick={this.handleClose} tipClassName= {classes.closeButton}>
                         <CloseIcon/>
                     </MyButton>
@@ -178,7 +182,6 @@ class RecipeDialog extends Component {
 RecipeDialog.propTypes = {
     clearErrors: PropTypes.func.isRequired,
     getRecipe: PropTypes.func.isRequired,
-    getRecipes: PropTypes.func.isRequired,
     recipeId: PropTypes.string.isRequired,
     userHandle: PropTypes.string.isRequired,
     recipe: PropTypes.object.isRequired,
@@ -191,7 +194,7 @@ const mapStateToProps = state => ({
 });
 
 const mapActionsToProps = {
-    getRecipe, clearErrors, getRecipes
+    getRecipe, clearErrors
 };
 
 export default connect(mapStateToProps, mapActionsToProps)(withStyles(styles)(RecipeDialog));

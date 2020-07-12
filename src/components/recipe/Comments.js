@@ -17,7 +17,7 @@ const styles = theme => ({
         height: 100,
         objectFit: 'cover',
         borderRadius: 50,
-        marginLeft: 30
+        marginLeft: 60
     },
     commentData: {
         marginLeft: 50
@@ -51,12 +51,12 @@ class Comments extends Component {
                                             color="primary">
                                                 {userHandle}
                                             </Typography>
+                                            {deleteButton}
                                             <Typography variant="body2" color="textSecondary">
                                                 {dayjs(createdAt).format('h:mm a, MMMM DD YYYY')}
                                             </Typography>
                                             <hr className={classes.invisibleSeparator}/>
                                             <Typography variant="body1">{body}</Typography>
-                                            {deleteButton}
                                         </div>
                                     </Grid>
                                 </Grid>

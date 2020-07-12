@@ -44,6 +44,7 @@ class PostRecipe extends Component {
         cookTime: '',
         ingredients: '',
         isRecipe: true,
+        videoLink: '',
         body: '',
         errors: {}
     };
@@ -56,7 +57,7 @@ class PostRecipe extends Component {
         };
 
         if (! nextProps.UI.errors && !nextProps.UI.loading) {
-            this.setState({ body: '', title: '', ingredients: '', cookTime: '', open: false, errors: {}});
+            this.setState({ body: '', title: '', ingredients: '', cookTime: '', videoLink: '', open: false, errors: {}});
         };
     };
 
@@ -79,7 +80,7 @@ class PostRecipe extends Component {
 
     handleSubmit = (event) => {
         event.preventDefault();
-        this.props.postRecipe({ title: this.state.title, cookTime: this.state.cookTime, ingredients: this.state.ingredients, body: this.state.body });
+        this.props.postRecipe({ title: this.state.title, cookTime: this.state.cookTime, ingredients: this.state.ingredients, body: this.state.body, videoLink: this.state.videoLink });
     };
 
     render() {
@@ -97,6 +98,14 @@ class PostRecipe extends Component {
                     label="Name of Recipe"
                     error={errors.title ? true : false }
                     helperText={errors.title}
+                    className={classes.textField}
+                    onChange={this.handleChange}
+                    fullWidth
+                    />
+                    <TextField
+                    name="videoLink"
+                    type="text"
+                    label="Valid link to online video (if any)"
                     className={classes.textField}
                     onChange={this.handleChange}
                     fullWidth
@@ -148,6 +157,14 @@ class PostRecipe extends Component {
                     label="Title"
                     error={errors.title ? true : false }
                     helperText={errors.title}
+                    className={classes.textField}
+                    onChange={this.handleChange}
+                    fullWidth
+                    />
+                    <TextField
+                    name="videoLink"
+                    type="text"
+                    label="Valid link to online video (if any)"
                     className={classes.textField}
                     onChange={this.handleChange}
                     fullWidth

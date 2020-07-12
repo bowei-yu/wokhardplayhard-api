@@ -19,6 +19,7 @@ import Grid from '@material-ui/core/Grid';
 // icons
 import ChatIcon from '@material-ui/icons/Chat';
 import LocalDiningIcon from '@material-ui/icons/LocalDining';
+import VideoLabelIcon from '@material-ui/icons/VideoLabel';
 
 // redux
 import { connect } from 'react-redux';
@@ -48,7 +49,7 @@ class Recipe extends Component {
         dayjs.extend(relativeTime);
         // same as const classes = this.props.classes
         const { classes, 
-                recipe: {difficultyRating, title, body, cookTime, createdAt, userImage, userHandle, recipeId, likeCount, commentCount}, 
+                recipe: {difficultyRating, title, body, cookTime, videoLink, createdAt, userImage, userHandle, recipeId, likeCount, commentCount}, 
                 user: { authenticated, credentials: { handle }} 
         } = this.props;
 
@@ -60,6 +61,10 @@ class Recipe extends Component {
             <EditRecipe recipe={this.props.recipe} />
         ) : null;
 
+        const video = !videoLink 
+                ? null 
+                : (<MyButton tip="Video available"> <VideoLabelIcon color="primary"/> </MyButton>);
+
         return (
             <Card className={classes.card}>
                 <Grid item sm={2}>
@@ -69,13 +74,14 @@ class Recipe extends Component {
                     <Typography variants="h5" component={Link} to={`/users/${userHandle}`} color="primary"> {userHandle} </Typography>
                     {deleteButton}
                     {editButton}
+                    {video}
                     <Typography variant="body2" color="textSecondary"> 
                     {dayjs(createdAt).fromNow()} </Typography>
                     <Typography variant="body1" style={{whiteSpace: 'pre-line'}}>
                         {title}
                     </Typography>
                     <Typography variant="body2" style={{whiteSpace: 'pre-line'}}>
-                        { cookTime === undefined || cookTime === "" ? body.split('\n')[0] : "Estimated cooking time: " + cookTime} 
+                        { cookTime === '' ? body.split('\n')[0] : "Estimated cooking time: " + cookTime} 
                     </Typography>
                     <LikeButton recipeId={recipeId}/>
                     <span>{likeCount <= 1 ? likeCount + ' Like' : likeCount + ' Likes'}</span>

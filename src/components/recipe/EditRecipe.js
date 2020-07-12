@@ -48,6 +48,7 @@ class EditRecipe extends Component {
         title: this.props.recipe.title,
         cookTime: this.props.recipe.cookTime,
         ingredients: this.props.recipe.ingredients,
+        videoLink: this.props.recipe.videoLink,
         body: this.props.recipe.body,
         errors: {}
     };
@@ -83,6 +84,7 @@ class EditRecipe extends Component {
         editedRecipe.title = this.state.title;
         editedRecipe.cookTime = this.state.cookTime;
         editedRecipe.ingredients = this.state.ingredients;
+        editedRecipe.videoLink = this.state.videoLink;
         editedRecipe.body = this.state.body;
         this.props.editRecipe(editedRecipe, this.props.recipe.recipeId);
         this.props.getRecipes();
@@ -110,6 +112,15 @@ class EditRecipe extends Component {
                             defaultValue={this.props.recipe.title}
                             error={errors.title ? true : false }
                             helperText={errors.title}
+                            className={classes.textField}
+                            onChange={this.handleChange}
+                            fullWidth
+                            />
+                            <TextField
+                            name="videoLink"
+                            type="text"
+                            label="Valid link to online video (if any)"
+                            defaultValue={this.props.recipe.videoLink}
                             className={classes.textField}
                             onChange={this.handleChange}
                             fullWidth
