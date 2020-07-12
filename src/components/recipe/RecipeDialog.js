@@ -138,11 +138,11 @@ class RecipeDialog extends Component {
                         </Typography>
                         <hr className={classes.invisibleSeparator}/>
                         <LikeButton recipeId={recipeId}/>
-                        <span>{likeCount} Likes</span>
+                        <span>{likeCount <= 1 ? likeCount + ' Like' : likeCount + ' Likes'}</span>
                         <MyButton tip="Comments">
                             <ChatIcon color="primary"/>
                         </MyButton>
-                        <span>{commentCount} Comments</span>
+                        <span>{commentCount <= 1 ? commentCount + ' Comment' : commentCount + ' Comments'}</span>
                         <MyButton tip="Difficulty">
                             <LocalDiningIcon color="primary"/>
                         </MyButton>

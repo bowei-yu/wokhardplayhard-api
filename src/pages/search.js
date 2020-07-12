@@ -8,9 +8,11 @@ import Profile from '../components/profile/Profile';
 
 import { connect } from 'react-redux';
 import { getRecipes } from '../redux/actions/dataActions';
+import MyButton from '../util/MyButton';
 
 import withStyles from '@material-ui/core/styles/withStyles';
 import { Typography } from '@material-ui/core';
+import ClearIcon from '@material-ui/icons/Clear';
 
 const styles = theme => ({
     ...theme.spreadThis,
@@ -22,6 +24,10 @@ const styles = theme => ({
     },
     instructions: {
         marginBottom: 10
+    },
+    clearButton: {
+        float: 'right',
+        marginTop: -45
     }
 });
 
@@ -39,6 +45,10 @@ class search extends Component {
         this.setState({search: event.target.value});
     };
 
+    clearSearch = () => {
+        this.setState({ search: ''});
+    };
+
     render() {
 
         const { classes } = this.props;
@@ -52,13 +62,20 @@ class search extends Component {
             const querywords = query.toLowerCase().split(' ');
             let current = '';
             let currentUser = '';
+            let currentTitle = '';
+            let currentIngredients = '';
             let filteredRecipes = [];
             let filterCounter = new Map();
             for (let r = 0; r < recipes.length; r++) {
                 current = recipes[r].body.toLowerCase();
                 currentUser = recipes[r].userHandle.toLowerCase();
+                currentTitle = recipes[r].title.toLowerCase();
+                currentIngredients = recipes[r].ingredients === undefined || recipes[r].ingredients === '' 
+                    ? ''
+                    : recipes[r].ingredients.toLowerCase();
                 for (let q = 0; q < querywords.length; q++) {
-                    if (current.indexOf(querywords[q]) > -1 || currentUser.indexOf(querywords[q]) > -1) {
+                    if (current.indexOf(querywords[q]) > -1 || currentUser.indexOf(querywords[q]) > -1
+                        || currentTitle.indexOf(querywords[q]) > -1 || currentIngredients.indexOf(querywords[q]) > -1) {
                         if (!filterCounter.has(recipes[r])) {
                             filterCounter.set(recipes[r], 1);
                         } else {
@@ -90,6 +107,9 @@ class search extends Component {
                         Type your search for recipe name, ingredients and user keywords here, 
                         leaving only a space between words:
                     </Typography>
+                    <MyButton onClick={this.clearSearch} tip="Clear Search" tipClassName={classes.clearButton}>
+                        <ClearIcon color="primary"/>
+                    </MyButton>
                     <input type="text" 
                     value={this.state.search}
                     onChange={this.updateSearch.bind(this)}

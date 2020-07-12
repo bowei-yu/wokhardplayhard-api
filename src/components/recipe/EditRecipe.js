@@ -94,7 +94,7 @@ class EditRecipe extends Component {
         return (
             <Fragment>
                 <MyButton onClick={this.handleOpen} tip="Edit post" tipClassName= {classes.editButton}>
-                    <EditIcon />
+                    <EditIcon color="primary"/>
                 </MyButton>
                 <Dialog open={this.state.open} onClose={this.handleClose} fullWidth maxWidth="md">
                     <MyButton tip="Close" onClick={this.handleClose} tipClassName= {classes.closeButton}>

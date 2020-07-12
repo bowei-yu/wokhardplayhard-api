@@ -94,7 +94,7 @@ class PostRecipe extends Component {
                     <TextField
                     name="title"
                     type="text"
-                    label="Name of recipe"
+                    label="Name of Recipe"
                     error={errors.title ? true : false }
                     helperText={errors.title}
                     className={classes.textField}
@@ -112,7 +112,7 @@ class PostRecipe extends Component {
                     <TextField
                     name="ingredients"
                     type="text"
-                    label="List of Ingredients (do state quantity)"
+                    label="List of Ingredients with quantity (do state clearly possible add-ons and substitutes)"
                     multiline
                     rows="15"
                     error={errors.title ? true : false }
@@ -124,7 +124,7 @@ class PostRecipe extends Component {
                     <TextField
                     name="body"
                     type="text"
-                    label="Directions for recipe"
+                    label="Directions for Recipe"
                     multiline
                     rows="15"
                     error={errors.body ? true : false }
