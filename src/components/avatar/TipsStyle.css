@@ -1,0 +1,19 @@
+.tips {
+  /* position: absolute;
+  right: 210px;
+  top: 580px; */
+
+  float: left;
+
+  /*Box*/
+  background-color: rgb(25, 200, 223);
+  border-radius: 15px;
+  padding: 20px;
+  width: 170px;
+
+  /*Text*/
+  font-weight: normal;
+  word-break: keep-all;
+  text-align: center;
+  font-variant: small-caps;
+}

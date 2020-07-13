@@ -1,0 +1,9 @@
+.button {
+  /* position: absolute; */
+  /* right: 30px;
+  top: 600px; */
+
+  float: right;
+  border: none;
+  cursor: pointer;
+}
