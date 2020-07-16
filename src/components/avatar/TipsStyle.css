@@ -3,13 +3,13 @@
   right: 210px;
   top: 580px; */
 
-  float: left;
+  /* float: left; */
 
   /*Box*/
   background-color: rgb(25, 200, 223);
-  border-radius: 15px;
+  /* border-radius: 15px;
   padding: 20px;
-  width: 170px;
+  width: 170px; */
 
   /*Text*/
   font-weight: normal;

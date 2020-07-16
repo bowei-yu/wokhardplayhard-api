@@ -4,9 +4,9 @@ import Initial from "../../images/avatar.png";
 import Changed from "../../images/avatar2.png";
 import { tips } from "./TipsArray";
 
-import "./ButtonStyle.css";
+// import "./ButtonStyle.css";
 import "./TipsStyle.css";
-import "./BoxStyle.css";
+// import "./BoxStyle.css";
 
 const imagesPath = {
   clicked: Changed,
@@ -36,9 +36,9 @@ class Avatar extends Component {
     }
 
     return (
-      <div className="div">
+      <div>
         {tipBox}
-        <button className="button">
+        <button>
           <img
             width="120"
             height="150"
