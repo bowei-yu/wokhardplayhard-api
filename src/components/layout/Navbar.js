@@ -14,6 +14,7 @@ import Button from '@material-ui/core/Button';
 // icons
 import HomeIcon from '@material-ui/icons/Home';
 import SearchIcon from '@material-ui/icons/Search';
+import TimerIcon from '@material-ui/icons/Timer';
 
 class Navbar extends Component {
 
@@ -27,8 +28,13 @@ class Navbar extends Component {
                    {authenticated 
                     ? (<Fragment>
                         <PostRecipe/>
+                        <Link to="/recent">
+                            <MyButton tip="Recent Posts">
+                                <TimerIcon/>
+                            </MyButton>
+                        </Link>
                         <Link to="/">
-                            <MyButton tip="Discover">
+                            <MyButton tip="What's Popular?">
                                 <HomeIcon/>
                             </MyButton>
                         </Link>
