@@ -13,6 +13,8 @@ import Typography from '@material-ui/core/Typography';
 import LocationOn from '@material-ui/icons/LocationOn';
 import LinkIcon from '@material-ui/icons/Link';
 import CalendarToday from '@material-ui/icons/CalendarToday';
+import SportsEsportsIcon from '@material-ui/icons/SportsEsports';
+import GamesIcon from '@material-ui/icons/Games';
 
 const styles = (theme) => ({
     ...theme.spreadThis
@@ -20,7 +22,7 @@ const styles = (theme) => ({
 
 const StaticProfile = (props) => {
 
-    const { classes, profile: { handle, createdAt, imageUrl, bio, website, location }} = props;
+    const { classes, profile: { handle, createdAt, imageUrl, bio, website, location, EXP }} = props;
 
     return (
         <Paper className={classes.paper}>
@@ -54,6 +56,11 @@ const StaticProfile = (props) => {
                         )}
                         <CalendarToday color="primary"/>{' '}
                         <span> joined {dayjs(createdAt).format('MMM YYYY')} </span>
+                        <hr/>
+                        {<Fragment>
+                            <SportsEsportsIcon color="primary"/> <span> {EXP} EXP </span>
+                            <GamesIcon color="primary"/> <span> {EXP < 50 ? "Rookie" : EXP < 100 ? "Kitchen-explorer" : EXP < 200 ? "Tips-Giver" : EXP < 400 ? "Solid-Advisor": "Expert"} </span>
+                        </Fragment>}
                     </div>
                 </div>
             </Paper>

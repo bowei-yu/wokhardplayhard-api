@@ -25,6 +25,8 @@ import LinkIcon from '@material-ui/icons/Link';
 import CalendarToday from '@material-ui/icons/CalendarToday';
 import EditIcon from '@material-ui/icons/Edit';
 import KeyboardReturn from '@material-ui/icons/KeyboardReturn';
+import SportsEsportsIcon from '@material-ui/icons/SportsEsports';
+import GamesIcon from '@material-ui/icons/Games';
 
 const styles = (theme) => ({
     ...theme.spreadThis
@@ -50,7 +52,7 @@ class Profile extends Component {
 
     render() {
         const { classes, 
-            user: { credentials: { handle, createdAt, imageUrl, bio, website, location },
+            user: { credentials: { handle, createdAt, imageUrl, bio, website, location, EXP },
             loading,
             authenticated
         }
@@ -99,6 +101,18 @@ class Profile extends Component {
                         )}
                         <CalendarToday color="primary"/>{' '}
                         <span> joined {dayjs(createdAt).format('MMM YYYY')} </span>
+                        <hr/>
+                        {<Fragment>
+                            <MyButton tip="Submit a post or comment to increase EXP!"
+                            tipClassName="exp">
+                                <SportsEsportsIcon color="primary"/> 
+                            </MyButton> <span> {EXP} EXP</span>
+                            <MyButton tip="Increase EXP to level up">
+                                <GamesIcon color="primary"/> 
+                            </MyButton>
+                            <span> {EXP < 50 ? "Rookie" : EXP < 100 ? "Kitchen-explorer" : EXP < 200 ? "Tips-Giver" : EXP < 400 ? "Solid-Advisor": "Expert"} </span>
+                        </Fragment>}
+                        <hr/>
                         <Avatar/>
                     </div>
                     <MyButton tip="Logout" onClick={this.handleLogout}>

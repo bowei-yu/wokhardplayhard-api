@@ -188,7 +188,7 @@ class PostRecipe extends Component {
             </DialogContent>);
         return (
             <Fragment>
-                <MyButton onClick={this.handleOpen} tip="Create a new post ">
+                <MyButton onClick={this.handleOpen} tip="Create a new post (+50 EXP)">
                     <AddIcon />
                 </MyButton>
                 <Dialog open={this.state.open} onClose={this.handleClose} fullWidth maxWidth="md">
