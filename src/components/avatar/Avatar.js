@@ -4,9 +4,9 @@ import Initial from "../../images/avatar.png";
 import Changed from "../../images/avatar2.png";
 import { tips } from "./TipsArray";
 
-// import "./ButtonStyle.css";
-import "./TipsStyle.css";
-// import "./BoxStyle.css";
+import Button from "@material-ui/core/Button";
+import Box from "@material-ui/core/Box";
+import Typography from "@material-ui/core/Typography";
 
 const imagesPath = {
   clicked: Changed,
@@ -30,15 +30,27 @@ class Avatar extends Component {
     var randomItem = tips[Math.floor(Math.random() * tips.length)];
     let tipBox;
     if (this.state.open) {
-      tipBox = <h4 className="tips">{randomItem.tip}</h4>;
+      tipBox = (
+        <Box border={2} borderColor="primary.main" borderRadius={8} p={1}>
+          <Typography display="block" gutterBottom>
+            {randomItem}
+          </Typography>
+        </Box>
+      );
     } else {
-      tipBox = <h4 className="tips">Click the chef for cooking tips!</h4>;
+      tipBox = (
+        <Box border={2} borderColor="primary.main" borderRadius={8} p={1}>
+          <Typography variant="button" display="block" gutterBottom>
+            Click the chef for cooking tips!
+          </Typography>
+        </Box>
+      );
     }
 
     return (
       <div>
         {tipBox}
-        <button>
+        <Button>
           <img
             width="120"
             height="150"
@@ -46,7 +58,7 @@ class Avatar extends Component {
             onClick={this.toggleImage}
             alt="avatar"
           />
-        </button>
+        </Button>
       </div>
     );
   }
