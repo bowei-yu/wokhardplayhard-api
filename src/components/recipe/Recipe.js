@@ -92,7 +92,7 @@ class Recipe extends Component {
                     <MyButton tip="Difficulty">
                         <LocalDiningIcon color="primary"/>
                     </MyButton>
-                    <span>Difficulty Level: {Math.ceil(difficultyRating)}</span>
+                    <span>Difficulty Level: { difficultyRating === 0 ? " No ratings yet" : Math.ceil(difficultyRating)}</span>
                     <RecipeDialog recipeId={recipeId} userHandle={userHandle} openDialog={this.props.openDialog} />
                </CardContent>
             </Card>

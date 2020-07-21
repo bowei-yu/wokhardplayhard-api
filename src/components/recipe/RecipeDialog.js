@@ -150,7 +150,7 @@ class RecipeDialog extends Component {
                         <MyButton tip="Difficulty">
                             <LocalDiningIcon color="primary"/>
                         </MyButton>
-                        <span>Difficulty Level:  {Math.ceil(difficultyRating)} </span>
+                        <span>Difficulty Level: { difficultyRating === 0 ? " No ratings yet" : Math.ceil(difficultyRating)}</span>
                 </Grid>
                 <hr className={classes.visibleSeparator} />
                 <RateDifficulty recipeId={recipeId} />
