@@ -124,8 +124,6 @@ class PostRecipe extends Component {
                     label="List of Ingredients with quantity (do state clearly possible add-ons and substitutes)"
                     multiline
                     rows="15"
-                    error={errors.title ? true : false }
-                    helperText={errors.title}
                     className={classes.textField}
                     onChange={this.handleChange}
                     fullWidth
@@ -175,6 +173,8 @@ class PostRecipe extends Component {
                     label="Description"
                     multiline
                     rows="10"
+                    error={errors.body ? true : false }
+                    helperText={errors.body}
                     className={classes.textField}
                     onChange={this.handleChange}
                     fullWidth
