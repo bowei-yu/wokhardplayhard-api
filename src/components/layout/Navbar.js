@@ -15,6 +15,7 @@ import Button from '@material-ui/core/Button';
 import HomeIcon from '@material-ui/icons/Home';
 import SearchIcon from '@material-ui/icons/Search';
 import TimerIcon from '@material-ui/icons/Timer';
+import FavoriteBorderIcon from '@material-ui/icons/FavoriteBorder';
 
 class Navbar extends Component {
 
@@ -36,6 +37,11 @@ class Navbar extends Component {
                         <Link to="/">
                             <MyButton tip="What's Popular?">
                                 <HomeIcon/>
+                            </MyButton>
+                        </Link>
+                        <Link to="/favorites">
+                            <MyButton tip="Your Favorites">
+                                <FavoriteBorderIcon/>
                             </MyButton>
                         </Link>
                         <Notifications/>

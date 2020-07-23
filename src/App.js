@@ -23,6 +23,7 @@ import signup from './pages/signup';
 import user from './pages/user';
 import search from './pages/search';
 import recent from './pages/recent';
+import liked from './pages/liked';
 
 import axios from 'axios';
 
@@ -59,6 +60,7 @@ class App extends Component {
                 <Route exact path="/users/:handle/recipe/:recipeId" component={user}/>
                 <Route exact path="/search" component={search}/>
                 <Route exact path = "/recent" component={recent} />
+                <Route exact path = "/favorites" component={liked} />
               </Switch>
               </div>
           </Router>
