@@ -97,7 +97,7 @@ class RecipeDialog extends Component {
 
         const recipeDirections = !ingredients ? null : <Typography variant="h6"> Directions </Typography>;
         const recipeIngredients = !ingredients ? null : <Typography variant="h6"> Ingredients </Typography>;
-        const video = !videoLink ? null : <ReactPlayer url={videoLink}/>;
+        const video = !videoLink || !ReactPlayer.canPlay(videoLink) ? null : <ReactPlayer url={videoLink}/>;
 
         const dialogMarkup = loading ? (
             <div className={classes.spinnerDiv}>

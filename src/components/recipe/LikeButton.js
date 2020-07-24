@@ -32,7 +32,7 @@ export class LikeButton extends Component {
         const { authenticated } = this.props.user;
 
         const likeButton = !authenticated
-        ? (<Link to="login">
+        ? (<Link to="/login">
             <MyButton tip="Like">
                 <FavoriteBorder color="primary"/>
             </MyButton>

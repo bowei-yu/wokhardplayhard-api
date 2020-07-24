@@ -9,6 +9,7 @@ import DeleteRecipe from './DeleteRecipe';
 import RecipeDialog from './RecipeDialog';
 import EditRecipe from './EditRecipe';
 import LikeButton from './LikeButton';
+import ReactPlayer from 'react-player';
 
 // MUI Stuff
 import Card from '@material-ui/core/Card';
@@ -61,7 +62,7 @@ class Recipe extends Component {
             <EditRecipe recipe={this.props.recipe} />
         ) : null;
 
-        const video = !videoLink 
+        const video = !videoLink || !ReactPlayer.canPlay(videoLink)
                 ? null 
                 : (<MyButton tip="Video available"> <VideoLabelIcon color="primary"/> </MyButton>);
 
